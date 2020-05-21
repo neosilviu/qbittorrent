@@ -52,3 +52,9 @@ COPY root/ /
 # ports and volumes
 EXPOSE 6881 6881/udp 8080
 VOLUME /config /downloads
+
+/bin/sh -c apk add --no-cache         jq=1.6-r0     && curl -J -L -o /tmp/bashio.tar.gz         "https://github.com/hassio-addons/bashio/archive/v0.8.0.tar.gz"     && mkdir /tmp/bashio     && tar zxvf         /tmp/bashio.tar.gz         --strip 1 -C /tmp/bashio         && mv /tmp/bashio/lib /usr/lib/bashio     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio         && rm -f -r         /tmp/*
+/bin/sh -c sed -i "s|/config|/config/qbittorrent|g" /etc/services.d/qbittorrent/run     && sed -i "s|/config|/config/qbittorrent|g" /etc/cont-init.d/30-config     && sed -i "s|/downloads|/share/downloads|g" /etc/cont-init.d/30-config     && sed -i "s|/downloads|/share/downloads|g" /app/qbittorrent/share/qbittorrent/qbittorrent.conf
+LABEL io.hass.arch=amd64
+LABEL io.hass.type=addon
+LABEL io.hass.name=qbittorrent
