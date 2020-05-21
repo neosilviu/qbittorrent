@@ -3,7 +3,7 @@
 # make our folders
 mkdir -p \
 	/config/qBittorrent \
-	/config/data
+#	/config/data
 
 # copy config
 [[ ! -e /config/qBittorrent/qBittorrent.conf ]] && \
